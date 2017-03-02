@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="filters">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Filters</title>
+	<meta name="viewport" content="width=device-width">
+	<style>
+		div p {
+			text-transform: capitalize;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Currency Filter -->
+	<h1>Angular Coffee</h1>
+	<hr>
+
+	<h2>American coffee: {{ 12 | currency : "USD $" }}</h2>
+	<h2>Latte coffee: {{ 12 | currency : "USD $" }}</h2>
+	<hr>
+	<!-- Uppercase, lowercase, capitalize filters -->
+	<h1>Countries</h1>
+
+	<p>{{ "China" | uppercase }}</p>
+	<p>{{ "ChiLE "| uppercase }}</p>
+	<p>{{ "CROACIA" | uppercase }}</p>
+	<p>{{ "coLOMBia" | uppercase }}</p>
+	<p>{{ "costa rica" | uppercase }}</p>
+	<hr>
+	<p>{{ "China" | lowercase }}</p>
+	<p>{{ "ChiLE "| lowercase }}</p>
+	<p>{{ "CROACIA" | lowercase }}</p>
+	<p>{{ "coLOMBia" | lowercase }}</p>
+	<p>{{ "costa rica" | lowercase }}</p>
+	<hr>
+	<div>
+		<p>{{ "China" | lowercase }}</p>
+		<p>{{ "ChiLE "| lowercase }}</p>
+		<p>{{ "CROACIA" | lowercase }}</p>
+		<p>{{ "coLOMBia" | lowercase }}</p>
+		<p>{{ "costa rica" | lowercase }}</p>
+	</div>
+	<hr>
+	<!-- Representing numbers -->
+	<h1>Representing numbers</h1>
+
+	<p>{{ false }}</p>
+	<p> {{ false | number }}</p>
+
+	<!-- Limiting the decimals' max number -->
+	<p>{{ 3.141592653589 | number: 2 }}</p>
+
+	<!-- Removing decimals numbers -->
+	<p>{{ 15.26535899744 | number: 0}}</p>
+
+	<!-- Combining filters -->
+	<p>{{ 22.205309 | number: 2 | currency: "MXP $"}}</p>
+
+	<hr>
+	<!-- Date formats -->
+	<h1>Date formats</h1>
+
+	<p>Date format: {{ '946641599000' | date }}</p>
+	<p>Spanish date format: {{ '946684799000' | date:'dd/MM/yy' }}</p>
+	<p>Short date: {{ '946684799000' | date:'shortDate' }}</p>
+	<p>Medium date: {{ '946684799000' | date:'mediumDate' }}</p>
+	<p>Large date: {{ '946684799000' | date:'fullDate' }}</p>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+	<script>
+		var angularApp = angular.module('filters', [])
+	</script>
+</body>
+
+</html>

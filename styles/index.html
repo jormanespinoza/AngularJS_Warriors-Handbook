@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Styling Angular</title>
+	<meta name="viewport" content="width=device-width">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+	<style>
+		body {
+			background-color: dimgray;
+			color: white;
+		}
+		
+		img {
+			display: block;
+			margin: auto
+		}
+		
+		.preguntas {
+			width: 400px;
+			margin: 30px auto;
+			background: silver;
+			padding: 20px;
+			text-align: center
+		}
+		
+		.secondStyle {
+			background-color: black;
+		}
+		
+		.secondStyle button {
+			background-color: white;
+			color: border-left: ;			
+			border: 3px solid silver;
+			border-radius: 5px;
+		}
+		
+		#contenedorCaja {
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body data-ng-app="Styles">
+
+	<div data-ng-controller="StylesController" data-ng-hide="ocultarMenu">
+		<img alt="incertidumbre" ng-src="{{ imagenActiva }}">
+
+		<div id="contenedorCaja">
+			<div ng-switch="opcion">
+				<h2 ng-switch-when="a">Front Cover</h2>
+				<h2 ng-switch-when="b">Diagonal Cover</h2>
+			</div>			
+		</div>
+
+		<div class="preguntas" data-ng-style="angularStyles" data-ng-class="angularClasses">
+			<button data-ng-click="opcionA()">Opción A</button>
+			<button data-ng-click="opcionB()">Opción B</button>
+			<hr>
+			<button data-ng-click="cambiarEstilo()">Cambiar Estilo</button>
+			<button data-ng-click="cambiarClase()">Cambiar Clase</button>
+			<hr>
+			<button data-ng-click="ocultarCaja()">Ocultar Caja</button>
+			<button data-ng-click="mostrarCaja()">Mostrar Caja</button>
+		</div>
+	</div>
+
+	<script>
+		var stylesApp = angular.module('Styles', [])
+
+		stylesApp.controller('StylesController', function ($scope) {
+			$scope.imagenActiva = 'http://www.manualdelguerrero.com/images/book_dummy.png'
+			
+			$scope.opcionA = function () {
+				$scope.imagenActiva = 'http://www.manualdelguerrero.com/images/book_dummy.png'
+				$scope.opcion = 'a'
+			}
+			$scope.opcionB = function () {
+				$scope.imagenActiva = 'http://www.manualdelguerrero.com/images/book_dummy_content.png'
+				$scope.opcion = 'b'
+			}
+
+			$scope.cambiarEstilo = function () {
+				$scope.angularStyles = {
+					width: '400px',					
+					borderRadius: '10px',
+					fontFamily: 'Arial'
+				}
+			}
+
+			$scope.cambiarClase = function () {
+				$scope.angularClasses = 'secondStyle'
+			}
+
+			$scope.ocultarCaja = function () {
+				$scope.ocultarMenu = true
+			}
+
+			$scope.mostrarCaja = function () {
+				$scope.ocultarMenu = false
+			}
+		})
+	</script>
+</body>
+
+</html>

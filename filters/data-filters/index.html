@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dataFilter">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Data Filter</title>
+	<meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+	<div ng-controller="filterLists">
+		<input type="text" ng-model="searchFruit" placeholder="Search">
+		<ul>
+			<li ng-repeat="fruit in fruits | filter:searchFruit">
+				{{ fruit }}
+			</li>
+		</ul>
+		<!-- Bigger Array -->
+		<input type="text" ng-model="searchFruitsSeveral" placeholder="Search">
+		<ul>
+			<li ng-repeat="fruit in fruitsSeveral | filter:searchFruitsSeveral | orderBy:'+name'">
+				<h2>{{ fruit.name }}</h2>
+				<p>Fruta de color {{ fruit.color }}, conocida por ser {{ fruit.properties }}</p>
+			</li>
+		</ul>
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+	<script>
+		var dataApp = angular.module('dataFilter', [])
+
+		dataApp.controller('filterLists', function ($scope) {
+			$scope.fruits = ['Apple', 'Orange', 'Lemon']
+			
+			$scope.fruitsSeveral = [
+				{
+					name: 'Kiwi',
+					color: 'Verde',
+					properties: 'rica en vitamina C'
+				},
+				{
+					name: 'Banana',
+					color: 'Amarila',
+					properties: 'rica en magnesio y potasio'
+				},
+				{
+					name: 'Arándano',
+					color: 'Azul',
+					properties: 'buen antioxidante'
+				}
+			]
+		})
+	</script>
+</body>
+
+</html>

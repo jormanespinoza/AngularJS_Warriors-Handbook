@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="expressionsApp">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Expressions</title>
+	<meta name="description" content="Manuel del Guerrero AngularJS">
+	<meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+	<!-- Example Expressions -->
+	<h1>Example Expressions</h1>
+
+	<div> {{ 5 + 5 }}</div>
+
+	<div>
+		If you multiply 10 by 2 the outcome will be: {{ 10 * 2 }}
+	</div>
+
+	<div>
+		{{ (30 -10 ) / 100 * 8 }}
+	</div>
+
+	<div>
+		{{ 2.8 + (-500) + 3 }}
+	</div>
+
+	<!-- Using Controllers -->
+	<h2>Using Controllers</h2>
+
+	<div ng-controller="expressionsController">
+
+		{{ message }} {{ secondMessage }}
+
+		<!-- Using objects-->
+		<h2>Using Objects</h2>
+
+		<p>This book was written by {{ book.author }}, it's called <em>"{{ book.title }}"</em>, and talks about {{ book.theme }}</p>
+
+		<!-- Using methods-->
+		<h2>Using Methods</h2>
+
+		<p>
+			Random number: {{ ramdomNumber() }}
+		</p>
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+	<script>
+		var angularApp = angular.module('expressionsApp', []);
+
+		angularApp.controller('expressionsController', function ($scope) {
+			$scope.message = "AngularJS Expressions"
+			$scope.secondMessage = " ...They let you add many values!"
+				// Creating an onject called book
+			$scope.book = {}
+			$scope.book.author = 'Carlos Solis'
+			$scope.book.title = 'Warrior\'s Handbook'
+			$scope.book.theme = 'AngularJS'
+				// Using methods
+			$scope.ramdomNumber = function () {
+				return Math.floor(Math.random() * 100)
+			}
+		});
+	</script>
+</body>
+
+</html>

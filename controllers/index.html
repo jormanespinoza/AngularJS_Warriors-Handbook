@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Controllers">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Angular Controllers</title>
+	<meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+	<div ng-controller="AppController">
+		<p>{{ message }}</p>
+		<p>{{ greeting }}</p>
+	</div>
+
+	<div ng-controller="Range">
+		{{ color }}
+	</div>
+
+	<div>
+		{{ color }}
+	</div>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+	<script>
+		var controllerApp = angular.module('Controllers', [])
+
+		controllerApp.controller('AppController', function ($scope) {
+			var greeting = 'Hi!'
+			$scope.message = 'Controller activated'
+		})
+
+		controllerApp.controller('Range', function ($scope) {
+			$scope.color = 'Red'
+		})
+	</script>
+</body>
+
+</html>

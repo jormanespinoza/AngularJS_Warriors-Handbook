@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+	<script src="https://code.angularjs.org/1.3.9/angular-touch.min.js"></script>
+	<style type="text/css">
+		#block {
+			background-color: red;
+			width: 100px;
+			height: 100px;
+			margin: 30px 10px;
+		}
+	</style>
+</head>
+
+<body data-ng-app="eventsApp">
+	<div data-ng-controller="eventsController">
+		<!-- Click Events -->
+		<button data-ng-click="counting()">Click</button>
+		<button data-ng-dblclick="counting()">Double Click</button>
+		<p data-ng-click="counting()">It also works with paragraphs</p>
+
+		<p><strong>Number of clicks:</strong> {{ countClicks }}</p>
+		<!-- Mouse Events and Mobile Events -->
+		<div id="block" data-ng-mouseenter="intoTheArea()" data-ng-mouseleave="outsideTheArea()" data-ng-swipe-left="swipeLeft()" data-ng-swipe-right="swipeRight()"></div>
+		<!-- Keyboard Events -->
+		<input type="text" data-ng-keydown="detectKey($event)" autofocus>
+		<hr>
+		<!-- Outcome -->
+		<strong>Status: {{ status }}</strong>
+
+	</div>
+
+	<script type="text/javascript">
+		var eventApp = angular.module('eventsApp', ['ngTouch'])
+
+		eventApp.controller('eventsController', function ($scope) {
+			$scope.countClicks = 0
+			$scope.counting = function () {
+				$scope.countClicks++
+			}
+			$scope.status = 'zzz'
+			$scope.intoTheArea = function () {
+				$scope.status = 'MouseEnter Active'
+			}
+			$scope.outsideTheArea = function () {
+				$scope.status = 'MouseOver Active'
+			}
+			$scope.swipeLeft = function () {
+				$scope.status = '<-- Swipe'
+			}
+			$scope.swipeRight = function () {
+				$scope.status = 'Swipe -->'
+			}
+			$scope.detectKey = function (e) {
+				switch (e.keyCode) {
+				case 37:
+					$scope.status = 'Left'
+					break
+				case 38:
+					$scope.status = 'Up'
+					break
+				case 39:
+					$scope.status = 'Right'
+					break
+				case 40:
+					$scope.status = 'Down'
+					break
+				}
+			}
+		})
+	</script>
+</body>
+
+</html>

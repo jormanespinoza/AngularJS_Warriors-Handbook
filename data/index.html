@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Data Collection</title>
+	<meta name="viewport" content="width=device-width">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+	<style>
+		body {
+			background-color: black;
+			color: white;
+		}
+	</style>
+</head>
+
+<body data-ng-app="dataCollection">
+
+	<div data-ng-controller="dataController">
+		<input type="text" data-ng-model="newItem">
+		<button data-ng-click="add()">Add</button>
+		<ul>
+			<li data-ng-repeat="item in data" data-ng-click="showData(item)">
+				{{ item }}
+			</li>
+		</ul>
+		<!-- Creating lists with objects -->
+		<hr>
+		<ul>
+			<li ng-repeat="hero in heroes">
+				{{ hero.name }}
+			</li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+		var dataApp = angular.module('dataCollection', [])
+
+		dataApp.controller('dataController', function ($scope, $http) {
+			$scope.data = ['laptop', 'monitor', 'keyboard']
+			$scope.add = function () {
+				console.log($scope.newItem)
+				if ($scope.newItem == undefined) {
+					alert('You need to add something in the field')
+				} else {
+					$scope.data.push($scope.newItem)
+					$scope.newItem = undefined
+				}
+			}
+			$scope.showData = function (info) {
+				console.log('You choose: ' + info)
+			}
+			$scope.heroes = [
+				{
+					name: 'Peter',
+					lastName: 'Parker'
+				},
+				{
+					name: 'Bruce',
+					lastName: 'Wayne'
+				},
+				{
+					name: 'Charles',
+					lastName: 'Xavier'
+				}
+			]
+			$scope.initialize = function () {
+				$http.get('data.json').
+					success( function (data) {
+						$scope.team = data;
+					})
+					.error( function (data) {
+						console.log('An error has ocurred while loading the file: ' + data)
+					})
+				}
+			$scope.initialize()
+		})
+	</script>
+</body>
+
+</html>
